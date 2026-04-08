@@ -1,0 +1,19 @@
+id: simple-rename-function
+name: "Rename a utility function"
+description: "Rename validate_user_id to check_user_id"
+codebase: "simple_project"
+prompt: "Rename validate_user_id to check_user_id"
+change_types: [RENAME]
+seeds: ["utils.py::validate_user_id"]
+
+expected_affected:
+  - node: "utils.py::validate_user_id"
+    reason: "The function being renamed"
+  - node: "service.py::process_order"
+    reason: "Calls validate_user_id"
+
+expected_excluded:
+  - node: "models.py::Order"
+    reason: "Unrelated model"
+  - node: "repository.py::get_order"
+    reason: "Unrelated repository function"

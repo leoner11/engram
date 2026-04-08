@@ -1,0 +1,14 @@
+bridges:
+  - name: "Event API"
+    backend:
+      node: "backend/views.py::list_events"
+    frontend:
+      files: ["frontend/useEvents.ts"]
+    bidirectional: true
+
+  - name: "Event Creation"
+    from:
+      node: "backend/views.py::create_event"
+    to:
+      files: ["frontend/useEvents.ts"]
+    bidirectional: true

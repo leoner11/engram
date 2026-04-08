@@ -1,0 +1,21 @@
+diff --git a/notifications.py b/notifications.py
+new file mode 100644
+index 0000000..abcdefg
+--- /dev/null
++++ b/notifications.py
+@@ -0,0 +1,15 @@
++"""Order notification service."""
++
++from models import Order
++
++
++def send_confirmation(order: Order) -> bool:
++    """Send order confirmation email."""
++    print(f"Confirmation sent for order {order.id}")
++    return True
++
++
++def send_cancellation(order: Order) -> bool:
++    """Send cancellation notification."""
++    print(f"Cancellation sent for order {order.id}")
++    return True

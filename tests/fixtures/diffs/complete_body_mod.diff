@@ -1,0 +1,13 @@
+diff --git a/utils.py b/utils.py
+index 1234567..abcdefg 100644
+--- a/utils.py
++++ b/utils.py
+@@ -10,7 +10,9 @@ def validate_user_id(user_id: str) -> bool:
+     if not user_id or not isinstance(user_id, str):
+         raise ValueError("Invalid user ID")
+     if len(user_id) < 3:
+-        raise ValueError("User ID too short")
++        raise ValueError(f"User ID too short: '{user_id}' (min 3 chars)")
++    if len(user_id) > 50:
++        raise ValueError(f"User ID too long: '{user_id}' (max 50 chars)")
+     return True

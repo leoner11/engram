@@ -1,0 +1,20 @@
+diff --git a/service.py b/service.py
+index 1234567..abcdefg 100644
+--- a/service.py
++++ b/service.py
+@@ -10,7 +10,7 @@ from utils import format_currency, validate_user_id
+ 
+ 
+-def process_order(user_id: str, product_ids: list[str]) -> Order:
++def process_order(user_id: str, product_ids: list[str], discount: float = 0.0) -> Order:
+     """
+     Process a new order for a user.
+ 
+@@ -25,6 +25,7 @@ def process_order(user_id: str, product_ids: list[str]) -> Order:
+         items=items,
+         status="confirmed",
+         created_at=datetime.now(),
++        discount=discount,
+     )
+ 
+     save_order(order)

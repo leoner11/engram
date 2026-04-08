@@ -1,0 +1,99 @@
+bridges:
+  # ── Django Model → Serializer → View chains ──────────────────
+  # The AST can't detect that EventSerializer.Meta.model = Event
+  # creates a dependency from EventSerializer to Event model.
+  
+  - name: "Event model → serializers"
+    from:
+      node: "backend/events/serializers.py::EventSerializer"
+    to:
+      node: "backend/events/models.py::Event"
+    edge_kind: "API_BRIDGE"
+    bidirectional: true
+
+  - name: "EventCreate serializer → Event model"
+    from:
+      node: "backend/events/serializers.py::EventCreateSerializer"
+    to:
+      node: "backend/events/models.py::Event"
+    edge_kind: "API_BRIDGE"
+    bidirectional: true
+
+  # Direct model → frontend: Event fields are what the UI renders
+  - name: "Event model → frontend components"
+    from:
+      node: "backend/events/models.py::Event"
+    to:
+      files:
+        - "frontend/src/components/EventDetail.jsx"
+        - "frontend/src/components/EventCard.jsx"
+        - "frontend/src/components/CreateEvent.jsx"
+        - "frontend/src/context/EventsContext.jsx"
+    edge_kind: "API_BRIDGE"
+    bidirectional: true
+
+  - name: "Feedback model → serializer"
+    from:
+      node: "backend/feedback/serializers.py::EventFeedbackSerializer"
+    to:
+      node: "backend/feedback/models.py::EventFeedback"
+    edge_kind: "API_BRIDGE"
+    bidirectional: true
+
+  - name: "Forms model → serializer"
+    from:
+      node: "backend/forms_engine/serializers.py::EventFormSerializer"
+    to:
+      node: "backend/forms_engine/models.py::EventForm"
+    edge_kind: "API_BRIDGE"
+    bidirectional: true
+
+  # ── Backend views → Frontend API calls ───────────────────────
+  # api.js is the single gateway to all backend endpoints.
+  
+  - name: "Event list/create API"
+    backend:
+      node: "backend/events/views.py::event_list"
+    frontend:
+      files:
+        - "frontend/src/services/api.js"
+        - "frontend/src/context/EventsContext.jsx"
+        - "frontend/src/components/CreateEvent.jsx"
+    bidirectional: true
+
+  - name: "Event detail API"
+    backend:
+      node: "backend/events/views.py::event_detail"
+    frontend:
+      files:
+        - "frontend/src/services/api.js"
+        - "frontend/src/components/EventDetail.jsx"
+    bidirectional: true
+
+  - name: "Event RSVP API"
+    backend:
+      node: "backend/events/views.py::event_rsvp"
+    frontend:
+      files:
+        - "frontend/src/services/api.js"
+        - "frontend/src/components/EventDetail.jsx"
+    bidirectional: true
+
+  - name: "Auth API"
+    backend:
+      files:
+        - "backend/accounts/views.py"
+    frontend:
+      files:
+        - "frontend/src/services/api.js"
+        - "frontend/src/context/AuthContext.jsx"
+    bidirectional: true
+
+  - name: "Feedback API"
+    backend:
+      files:
+        - "backend/feedback/views.py"
+    frontend:
+      files:
+        - "frontend/src/services/api.js"
+    bidirectional: true

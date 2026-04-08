@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "engram"
+version = "0.8.0"
+description = "External cognitive system for LLMs — task-adaptive, token-budgeted code context"
+requires-python = ">=3.10"
+authors = [
+    {name = "Leonard", email = "leonard@mjcxstudio.com"},
+]
+dependencies = [
+    "tree-sitter>=0.24",
+    "tree-sitter-python>=0.23",
+    "tree-sitter-typescript>=0.23",
+    "tree-sitter-javascript>=0.23",
+    "click>=8.0",
+    "pathspec>=0.12",
+    "mcp>=1.0",
+    "watchdog>=4.0",
+    "fastapi>=0.100",
+    "uvicorn>=0.20",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-cov", "ruff", "pyyaml>=6.0"]
+precise = ["tiktoken"]
+llm = ["anthropic>=0.30", "openai>=1.0"]
+ui = ["fastapi>=0.100", "uvicorn>=0.20"]
+bench = ["pyyaml>=6.0"]
+dart = ["tree-sitter-dart>=0.1"]
+
+[project.scripts]
+engram = "engram.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
