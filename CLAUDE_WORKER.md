@@ -1,3 +1,5 @@
+# THIS IS TO BE PUT ON THE WORKER AGENTS DIRECTORY OR EQUIVALENT
+
 # Worker Instructions
 
 You are a worker model. You have been given a pre-assembled context package by an orchestrator.
