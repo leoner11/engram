@@ -109,7 +109,7 @@ The prompt should imply a change type so activation rules fire correctly:
 
 If a seed shows `match: top_connected_fallback` it means Engram guessed. Treat that context with suspicion.
 
-### Fix gaps with bridges
+### Fix gaps with bridges (IMPORTANTTT!!!)
 
 If the query missed frontend components, templates, or API consumers:
 ```
@@ -205,7 +205,7 @@ Save when:
 
 ---
 
-## Why this workflow order matters
+## Why this workflow order matters (IMPORTANT)
 
 Read **[ENGRAM_AGENT_GUIDE.md](./ENGRAM_AGENT_GUIDE.md)** for the reasoning behind each phase — why search comes before explore, why `engram_query` should be skipped for read-only tasks, how the feedback loop between verify/save/search compounds over sessions, and common mistakes that waste tokens.
 
